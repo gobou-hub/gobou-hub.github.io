@@ -1,0 +1,22 @@
+<html>
+<body style="margin:0;padding:0;">
+    <img id="mypic" src="" width="841.75" height="312.5">
+    <script>
+        var pics_src = new Array("Sand1.png","Sand2.png","Sand3.png","Sand11.png","Sand12.png","Sand_HP.png");
+        var num = -1;
+
+        slideshow_timer();
+
+        function slideshow_timer(){
+        if (num == 5){
+        num = 0;
+        }
+        else {
+        num ++;
+        }
+        document.getElementById("mypic").src=pics_src[num];
+        setTimeout("slideshow_timer()",10000);
+        }
+    </script>
+</body>
+</html>
