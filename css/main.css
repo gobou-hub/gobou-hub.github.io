@@ -1,0 +1,615 @@
+@charset "utf-8";
+
+/* ==========================================================================
+   基本設定 & Body
+   ========================================================================== */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: azure;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   レスポンシブ設定 (共通)
+   ========================================================================== */
+@media (max-width: 768px) {
+
+    .pop-h1,
+    .pop-h1-stroke {
+        font-size: 2.5rem;
+    }
+
+    .pop-h1-gradient {
+        font-size: 3rem;
+    }
+
+    /* 必要に応じて他のレスポンシブスタイルをここに追加 */
+}
+
+/* ==========================================================================
+   主要レイアウトコンテナ
+   ========================================================================== */
+.site-main,
+.page-container,
+.site-footer {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.site-main {
+    width: 800px;
+    margin-top: 1em;
+    background-color: white;
+    border-top: solid 2px #404040;
+    border-bottom: solid 2px #404040;
+    text-align: left;
+}
+
+.page-container {
+    width: 500px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   セクションと見出し (主に .site-main 内部で使用)
+   ========================================================================== */
+.site-main section {
+    margin-bottom: 2em;
+}
+
+.site-main section:last-child {
+    margin-bottom: 0;
+}
+
+.section-title {
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #333;
+    text-align: left;
+    flex-grow: 1;
+    padding-right: 1em;
+}
+
+.subsection-title {
+    display: none;
+    font-size: 1.15em;
+    margin-top: 1em;
+    margin-bottom: 0.6em;
+    color: #444;
+    text-align: left;
+}
+
+/* ==========================================================================
+   ユーザーステータスエリア (主に .site-main 内部)
+   ========================================================================== */
+.button-container {
+    display: flex;
+    /* Flexboxを有効にする */
+    justify-content: space-between;
+    /* 両端に配置する */
+    align-items: center;
+    /* 上下の位置を中央に揃える（任意）*/
+    flex-basis: 100%;
+}
+
+#userStatusArea {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 1em;
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.user-identification {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.8em;
+}
+
+#LogoutButton {
+    /* 更新ボタンなどと共通のスタイル */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.6em 1.5em;
+    font-size: 0.9em;
+
+    /* ログアウト用の配色 */
+    background-color: #dc3545;
+    /* 赤色 */
+}
+
+#LogoutButton:hover {
+    background-color: #c82333;
+    /* 少し濃い赤色 */
+}
+
+#LogoutButton:disabled {
+    background-color: #dc3545;
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+.icon-power::before {
+    content: '\22A0';
+    /* 電源マークのUnicode */
+}
+
+.status-grid,
+.medal-area {
+    flex-basis: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.8em;
+}
+
+.user-identification p {
+    font-weight: bold;
+    margin: 0.2em 0;
+}
+
+.status-item {
+    font-weight: bold;
+    background-color: #f8f8f8;
+    padding: 0.8em;
+    margin: 0em;
+    border-radius: 4px;
+    font-size: 0.95em;
+    text-align: left;
+}
+
+.medal-area {
+    padding-left: 5px;
+    padding-top: 1em;
+    text-align: left;
+}
+
+.medal-area img {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* ==========================================================================
+   ナビゲーション (主に .site-main 内部)
+   ========================================================================== */
+#userActions {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.action-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8em;
+}
+
+/* ==========================================================================
+   フォーム共通スタイル
+   ========================================================================== */
+.form-group {
+    margin-bottom: 1.2em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    color: #333;
+    text-align: left;
+}
+
+.form-group .form-label {
+    flex-basis: 150px;
+    flex-shrink: 0;
+    margin-right: 15px;
+    margin-bottom: 0;
+    text-align: right;
+}
+
+.form-control,
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.6em 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    /* 共通化 */
+    box-sizing: border-box;
+    /* 共通化 */
+    font-family: inherit;
+    /* 共通化 */
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+.form-group.horizontal-group input[type="text"],
+.form-group.horizontal-group input[type="password"],
+.form-group.horizontal-group input[type="email"] {
+    flex-grow: 1;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 1.5em;
+}
+
+/* ==========================================================================
+   ボタン共通スタイル & バリエーション
+   ========================================================================== */
+button,
+.action-button,
+.btn-submit,
+.btn-secondary,
+.btn-delete-message {
+    display: inline-block;
+    padding: 0.6em 1.5em;
+    font-size: 0.9em;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    white-space: nowrap;
+}
+
+.action-button {
+    color: #333;
+    background-color: #f0f0f0;
+    border-color: #bbb;
+    width: 15em;
+}
+
+.action-button:hover {
+    background-color: #e0e0e0;
+    border-color: #aaa;
+}
+
+.action-button:disabled {
+    background-color: #f0f0f0;
+    border-color: #bbb;
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.btn-submit {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    width: 15em;
+    margin-top: 0.5em;
+}
+
+.btn-submit:hover {
+    background-color: #4cae4c;
+    border-color: #45a045;
+}
+
+.btn-submit:disabled {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+#contactModule label[for="messageInput"] {
+    font-weight: bold;
+    display: block;
+    width: auto;
+    margin-bottom: 0.5em;
+}
+
+#messageInput {
+    resize: vertical;
+    width: 100%;
+    box-sizing: border-box;
+    height: 120px;
+    min-height: 120px;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1em;
+}
+
+/* ==========================================================================
+   ローディングスピナー (共通)
+   ========================================================================== */
+#loading {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px;
+    border: 5px solid #ccc;
+    border-top: 5px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================================================
+   主要レイアウトコンテナ (または該当するセクションのスタイル)
+   ========================================================================== */
+.position-relative {
+    position: relative;
+}
+
+/* ==========================================================================
+   ポイント利用履歴/メッセージ
+   ========================================================================== */
+table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 0;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 8px 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+#pointuselist th,
+#messagelist th {
+    border-top: 2px solid #ddd;
+    background-color: #f8f8f8;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+#pointuselist .status-利用処理中 {
+    color: green;
+}
+
+#pointuselist .status-抽選中 {
+    color: blue;
+}
+
+#pointuselist .status-利用済（当選） {
+    color: red;
+}
+
+#pointuselist tr:hover {
+    background-color: #e0f7fa;
+}
+
+.table-actions {
+    flex-shrink: 0;
+}
+
+.btn-secondary {
+    /* 共通ボタンでpadding, font-sizeなどをカバー */
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    border: none;
+    /* 個別設定 */
+    border-radius: 5px;
+    /* 個別設定 (共通の4pxと異なるため残す) */
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.section-header-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: #4cae4c;
+    border-color: #45a045;
+}
+
+.btn-secondary:disabled {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.icon-refresh::before {
+    content: '\21BB';
+}
+
+#messagelist .message-content-row td {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 0.95em;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.message-header-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.message-header-row:hover {
+    background-color: #f0f8ff;
+}
+
+.message-header-row.active {
+    background-color: #e0f7fa;
+    font-weight: bold;
+    border-bottom: none;
+}
+
+.btn-delete-message {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    /* 個別設定 */
+    border-radius: 4px;
+    padding: 5px 10px;
+    /* 個別設定 */
+    font-size: 0.85em;
+    /* 個別設定 */
+    transition: background-color 0.2s ease;
+}
+
+.btn-delete-message:hover {
+    background-color: #c82333;
+}
+
+.btn-delete-message:disabled {
+    background-color: #dc3545;
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   ユーティリティクラス
+   ========================================================================== */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+#whatIsThis {
+    font-weight: bold;
+    text-align: center;
+    white-space: pre-line;
+    margin-bottom: 1em;
+}
+
+#notice {
+    text-align: center;
+    font-size: small;
+    white-space: pre-line;
+}
+
+/* ==========================================================================
+   ゲーム記録
+   ========================================================================== */
+.vertical-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.vertical-info-table th,
+.vertical-info-table td {
+    border: 1px solid #ccc;
+    padding: 0.6rem 1rem;
+    text-align: left;
+}
+
+.vertical-info-table th {
+    background-color: #f5f5f5;
+    width: 50%;
+}
+
+.vertical-info-table td {
+    background-color: #fff;
+}
+
+.table-switch-buttons {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.table-toggle-btn {
+    width: 10rem;
+    margin-right: 0.5rem;
+    padding: 0.4rem 1rem;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.table-toggle-btn.active {
+    background-color: #ccc;
+    font-weight: bold;
+}

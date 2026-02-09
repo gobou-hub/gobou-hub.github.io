@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Sign up</title>
+        </head>
+        <body>
+            <h1>Sign up</h1>
+            <div id="inputbox">
+                <dd class="serch">
+                    <label style="font-weight: bold;">名前：</label><input id="inputUserName" autocomplete="off">
+                </dd>
+                <dd class="serch">
+                    <label style="font-weight: bold;">パスワード：</label><input type="password" id="inputPassWord" autocomplete="off">
+                </dd>
+                <div>
+                    <button class="send" onclick="submit()">登録</button>
+                </div>
+            </div>
+
+            <div id="complete">
+                <h2>登録しました</h2>
+                <div id="newid"></div>
+                <p>IDはログインの際に必要になります</p>
+            </div>
+            
+
+        </body>
+        <style>
+            body {
+                font-family: system-ui;
+                background-color: azure;
+                margin: auto;
+                text-align: center;
+            }
+            
+            #inputUserName,#inputPassWord {
+                font-size: 18px;
+                width: 300px;
+                height: 25px;
+                background-color: #fff;
+                border: solid 1px;
+                outline: none;
+            }
+
+            .send {
+                border: solid 1px;
+                margin: 50px auto;
+                padding: 5px 30px;
+                background-color: #ddd;
+            }
+
+            .send:hover {
+                background-color: #ccc;
+            }
+
+            dd.serch {
+                display: flex;
+                justify-content: center;
+                margin: 5px auto;
+            }
+
+            #inputbox {
+                margin: 50px auto;
+                display: block;
+            }
+
+            label {
+                display: inline-block;
+                width: 130px;
+                margin: auto 0;
+                vertical-align: middle;
+            }
+
+            #complete {
+                display: none;
+            }
+        </style>
+        <script>
+            var aElement = document.getElementById("inputUserName");
+            var bElement = document.getElementById("inputPassWord");
+            var cElement = document.getElementById("inputbox");
+            var dElement = document.getElementById("complete");
+            var eElement = document.getElementById("newid");
+            
+            var url = "https://script.google.com/macros/s/AKfycbyvW7CaoYzDpdDHt6Xyh86pXjdzejVGjyamZYVYRo5guOAGNmS2Ojykij7w0Ynq-pIRwA/exec";
+            var xhr = new XMLHttpRequest();
+
+            function submit() {
+                if(aElement.value == "") {
+                    alert('名前が空欄です');
+                    return;
+                }
+                if(bElement.value == "") {
+                    alert('パスワードが空欄です');
+                    return;
+                }
+
+                var param ="?userName=" + aElement.value + "&passWord=" + bElement.value + "&valueFlag=0";
+
+                xhr.open("GET", url + param, false);
+                xhr.send();
+
+                if (xhr.status !== 200) {
+                    throw new Error("Error " + xhr.status);
+                }
+                
+                console.log(xhr.response);
+
+                newid = JSON.parse(xhr.response).id;
+
+                eElement.innerHTML = "ID：" + newid;
+
+                aElement.value = "";
+                bElement.value = "";
+
+                dElement.style.display = "block";
+                cElement.style.display = "none";
+            }
+        </script>
+    </html>

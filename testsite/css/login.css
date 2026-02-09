@@ -1,0 +1,228 @@
+@charset "utf-8";
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: azure;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.pop-h1 {
+    font-family: 'M PLUS Rounded 1c', 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 3.5rem;
+    color: #8B4513;
+    text-shadow:
+        2px 2px 0 #fff,
+        4px 4px 0 #FFD700;
+    transform: rotate(-2deg);
+    padding: 10px 20px;
+    background-color: #fffaf0;
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .pop-h1,
+    .pop-h1-stroke {
+        font-size: 2.5rem;
+    }
+
+    .pop-h1-gradient {
+        font-size: 3rem;
+    }
+}
+
+#loginBox {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 50px auto;
+    text-align: left;
+}
+
+#loginBox h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    flex-basis: 150px;
+    flex-shrink: 0;
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+#TIkTokID,
+#Password {
+    flex-grow: 1;
+    font-size: 16px;
+    padding: 10px 12px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#tiktokIdInput:focus,
+#Password:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    width: 10em;
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    outline: none;
+}
+
+.btn:disabled {
+    background-color: #007bff;
+    border-color: #007bff;
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.btn[type="button"] {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn[type="button"]:hover,
+.btn[type="button"]:focus {
+    background-color: #545b62;
+    border-color: #545b62;
+}
+
+.btn[type="button"]:disabled {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+#Loading {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px;
+    border: 5px solid #ccc;
+    border-top: 5px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#announcementArea,
+.announcement-section {
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 50px auto;
+}
+*/
+
+/* ログインフォーム直後のお知らせ見出し（H3相当） */
+/* HTMLにH3を追加できない場合、最初のdivをスタイル */
+#loginBox + div:nth-of-type(1) { /* #loginBox の直後の最初の div */
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #0056b3; /* 目立つ色 */
+    margin-top: 25px; /* フォームとの間隔 */
+    margin-bottom: 10px;
+    text-align: center; /* 中央揃え */
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #c0c0c0; /* 下に点線 */
+}
+
+
+/* ログインフォーム直後のお知らせ内容（p相当） */
+/* HTMLにpを追加できない場合、2番目のdivをスタイル */
+#loginBox + div:nth-of-type(2) { /* #loginBox の直後の2番目の div */
+    font-size: 1em;
+    color: #555;
+    background-color: #ffe0b2; /* メンテナンスカラー (オレンジ系) */
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ffcc80;
+    margin-bottom: 20px; /* 下の要素との間隔 */
+    text-align: center; /* 中央揃え */
+}
+
+.announcement-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #0056b3;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    text-align: center;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #c0c0c0;
+}
+.announcement-text {
+    font-size: 1em;
+    color: #555;
+    background-color: #ffe0b2;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ffcc80;
+    margin-bottom: 0;
+    text-align: center;
+}

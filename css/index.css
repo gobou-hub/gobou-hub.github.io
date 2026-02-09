@@ -1,0 +1,111 @@
+@charset "utf-8";
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: azure;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.pop-h1 {
+    font-family: 'M PLUS Rounded 1c', 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 3.5rem;
+    color: #8B4513;
+    text-shadow:
+        2px 2px 0 #fff,
+        4px 4px 0 #FFD700;
+    transform: rotate(-2deg);
+    padding: 10px 20px;
+    background-color: #fffaf0;
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .pop-h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* ナビゲーション全体の調整 */
+#mainNavigation ul {
+    list-style: none; /* ・を消す */
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* ボタンを縦に並べる */
+    align-items: center;   /* 中央揃え */
+    gap: 15px; /* ボタン間の余白 */
+}
+
+/* 全てのボタンに共通する基本スタイル */
+.btn {
+    width: 24rem;
+    max-width: 450px; /* PCでも広がりすぎないように最大幅を指定 */
+    padding: 16px 24px;
+    font-family: 'M PLUS Rounded 1c', sans-serif; /* 指定されたフォント */
+    font-size: 1em; /* 少し大きめの文字 */
+    font-weight: bold;
+    border-radius: 12px; /* 角を丸くする */
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease-in-out; /* アニメーションを滑らかに */
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* --- モダンフラットデザイン --- */
+.btn-flat {
+    background-color: #6a5acd; /* スレートブルー (デフォルト色) */
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+}
+
+.btn-flat:hover {
+    background-color: #5a4ab9;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+}
+
+.btn-flat:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* --- 個別色の設定 --- */
+
+/* 「重要」ボタンのスタイル */
+.btn-flat.important {
+    background-color: #ff6347; /* トマトレッド */
+}
+.btn-flat.important:hover {
+    background-color: #e0553d;
+}
+
+/* ログインボタン (#Login) のスタイル */
+#Login.btn-flat {
+    background-color: #20b2aa; /* ライトシーグリーン */
+}
+#Login.btn-flat:hover {
+    background-color: #1a9a93;
+}
+
+/* 利用規約ボタン (#TermsLink) のスタイル */
+#Terms.btn-flat {
+    background-color: #778899; /* ライトスレートグレー */
+    color: #fff;
+}
+#Terms.btn-flat:hover {
+    background-color: #667788;
+}

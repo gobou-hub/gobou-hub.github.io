@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png">
+    <title>ファンクラブ名募集フォーム</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            padding: 0px 20px;
+            background-color: #f5e4c4;
+        }
+        .decorated-heading {
+          display: inline-flex; /* または display: flex; */
+          align-items: center; /* 垂直方向中央揃え */
+          gap: 10px;          /* 要素間の間隔 */
+        }
+        h1 {
+            font-size: 200%;
+        }
+        .decorated-heading::before,
+        .decorated-heading::after {
+          content: "";
+          display: inline-block; /* または block */
+        
+          background-image: url('https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/d56945782445b0b8c8658ed44f894c7b~tplv-obj.webp');
+          background-size: contain; /* または cover, 幅高さ指定 */
+          background-repeat: no-repeat;
+          background-position: center;
+
+          width: 50px;
+          height: 50px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            resize: vertical;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            box-sizing: border-box; /* paddingを含めてwidth 100%にする */
+        }
+        textarea {
+            height: 100px;
+            min-height: 100px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        /* レスポンス表示用のスタイル */
+        #responseMessage {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        #responseMessage.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        #responseMessage.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="decorated-heading">ファンクラブ名募集フォーム</h1>
+    
+    <form id="contactForm">
+        <div>
+            <label for="nameInput">ファンクラブ名</label>
+            <input type="text" id="main" name="main" autocomplete="off" required>
+        </div>
+
+        <div>
+            <label for="emailInput">備考</label>
+            <textarea id="remarks" name="remarks" autocomplete="off"></textarea>
+        </div>
+
+        <div>
+            <button type="submit" id="submit">送信</button>
+        </div>
+    </form>
+
+    <div id="responseMessage"></div>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const submitButton = document.getElementById('submit');
+        const responseMessageDiv = document.getElementById('responseMessage');
+        const gasWebAppUrl = 'https://script.google.com/macros/s/AKfycbykQ1L90HEJMDVHcuSy2RIJ3KmCDDqQatPcccdSDs2ou9U1aqdxryJXykP6H4aXDrMRMA/exec';
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // デフォルトのフォーム送信（ページ遷移）をキャンセル
+
+            submitButton.disabled = true;
+            submitButton.textContent = '送信中...'; // 送信中メッセージ
+            responseMessageDiv.textContent = ''; // テキストをリセット
+            responseMessageDiv.className = ''; // スタイルをリセット
+
+            // FormDataオブジェクトを作成してフォームデータを取得
+            const formData = new FormData(form);
+
+            // fetch APIを使用してPOSTリクエストを送信
+            fetch(gasWebAppUrl, {
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            })
+            .then(response => {
+                // GASからのレスポンスをJSONとしてパース
+                // レスポンスがJSONでない場合や、ネットワークエラーでエラーを発生させる
+                if (!response.ok) {
+                    // HTTPステータスが 200-299 以外の場合
+                    // GAS側でエラー時にJSONを返していても、ここでエラーとして扱える
+                     return response.json().then(errData => {
+                        throw new Error(errData.message || `HTTP error! status: ${response.status}`);
+                    }).catch(() => {
+                        // JSONパースに失敗した場合 (GASがJSON以外を返したなど)
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                // レスポンスメッセージを表示
+                responseMessageDiv.textContent = data.message; // GASからのメッセージを表示
+                if (data.status === 'success') {
+                    submitButton.disabled = false;
+                    submitButton.textContent = '送信'; // 送信メッセージ
+                    responseMessageDiv.className = 'success'; // 成功時のスタイルを適用
+                    form.reset(); // フォームの内容をリセット (任意)
+                } else {
+                    responseMessageDiv.className = 'error'; // エラー時のスタイルを適用
+                }
+            })
+            .catch(error => {
+                // エラーメッセージを表示
+                submitButton.disabled = false;
+                submitButton.textContent = '送信'; // 送信メッセージ
+                responseMessageDiv.textContent = `エラーが発生しました: ${error.message}`;
+                responseMessageDiv.className = 'error'; // エラー時のスタイルを適用
+            });
+        });
+    </script>
+
+</body>
+</html>
