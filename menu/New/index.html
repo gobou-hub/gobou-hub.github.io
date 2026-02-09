@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .slideshow {
+            position: relative;
+            width: 841.75px;
+            height: 312.5px;
+        }
+
+        .slideshow img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 841.75px;
+            height: 312.5px;
+            transition: opacity 1s ease;
+            opacity: 0;
+            z-index: 0;
+        }
+
+        .slideshow img.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .caption {
+            position: absolute;
+            left: 300px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #ff3399;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 0px 20px;
+            z-index: 2;
+            text-shadow: 1px 1px 0 #fff;
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .caption.animate {
+            animation: fadeInScale 0.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slideshow">
+        <img id="img1" src="">
+        <img id="img2" src="">
+    </div>
+    <div id="caption" class="caption">現在の倍率：1倍</div>
+
+    <script>
+        const pic_Bed = ["Bed/Bed1.png", "Bed/Bed2.png", "Bed/Bed3.png", "Bed/bed4.png"];
+        const pic_Sand = ["Sand/Sand1.png", "Sand/Sand2.png", "Sand/Sand3.png", "Sand/Sand4.png"];
+
+        let gametype = "Bedrock";
+        let magnification = 1;
+
+        let pics_src = pic_Bed;
+        let max = pics_src.length - 2;
+        let num = -1;
+        let showingFirst = true;
+
+        const img1 = document.getElementById("img1");
+        const img2 = document.getElementById("img2");
+        const caption = document.getElementById("caption");
+
+        slideshow_timer();
+        document.addEventListener('DOMContentLoaded', on);
+
+        const url = "https://script.google.com/macros/s/AKfycbxB4jbsFRPnpsx_ExhODHNiv7H6Vn1h_PiftLBeme_3N42PmtalyKGTr0sICnjIPbVS/exec";
+
+        function slideshow_timer() {
+            num = (num > max) ? 0 : num + 1;
+            const nextImage = pics_src[num];
+
+            if (showingFirst) {
+                img2.src = nextImage;
+                img2.classList.add('active');
+                img1.classList.remove('active');
+            } else {
+                img1.src = nextImage;
+                img1.classList.add('active');
+                img2.classList.remove('active');
+            }
+
+            showingFirst = !showingFirst;
+
+            setTimeout(slideshow_timer, 15000);
+        }
+
+        function on() {
+            setInterval(typeSelect, 3000);
+        }
+
+        async function typeSelect() {
+            const response = await fetch(url, { method: "GET" });
+            const users = await response.json();
+
+            if (gametype !== users.type) {
+                if (users.type === "Bedrock") {
+                    pics_src = pic_Bed.slice();
+                } else if (users.type === "Sandbox") {
+                    pics_src = pic_Sand.slice();
+                }
+                gametype = users.type;
+                max = pics_src.length - 2;
+
+                num = 0;
+                if (showingFirst) {
+                    img2.src = pics_src[num];
+                    img2.classList.add('active');
+                    img1.classList.remove('active');
+                } else {
+                    img1.src = pics_src[num];
+                    img1.classList.add('active');
+                    img2.classList.remove('active');
+                }
+
+                showingFirst = !showingFirst;
+            }
+
+            updateCaption("現在の倍率：" + users.magnification + "倍");
+        }
+
+        function updateCaption(newText) {
+            if (caption.innerText !== newText) {
+                caption.innerText = newText;
+                caption.classList.remove('animate');     // 一度クラスを外す
+                void caption.offsetWidth;               // 再描画を強制
+                caption.classList.add('animate');       // 再追加してアニメ実行
+            }
+        }
+    </script>
+</body>
+
+</html>
