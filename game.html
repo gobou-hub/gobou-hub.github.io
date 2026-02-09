@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Gift Battle</title>
+            <link rel="stylesheet" href="css/game.css" type="text/css">
+        </head>
+        <body>
+            <p id="timerString"></p>
+
+            <div id="main"></div>
+
+            <div class="field">
+                <div>トータル追加数：</div>
+                <div id="add"></div>
+            </div>
+            
+            <div id="gamebutton">
+                <dd class="server">
+                    <button class="send" onclick="get()">スタート</button>
+                    <button class="send" onclick="stop()">ストップ</button>
+                </dd>
+            </div>
+
+            <button id="reset" onclick="reset()">リセット</button>
+
+            <div id="tilfinity">
+                <iframe id="GiftFeed" src="https://tikfinity.zerody.one/widget/gifts?cid=965733"></iframe>
+                <iframe id="TopGifters" src="https://tikfinity.zerody.one/widget/topgifter?cid=965733"></iframe>
+            </div>
+
+            <div class="info">
+                <div id="endless"></div>
+                <div id="addmagnification"></div>
+                <div id="submagnification"></div>
+                <div id="keyupdown"></div>
+                <div id="Feed1"></div>
+                <div id="Feed2"></div>
+            </div>
+        </body>
+    <script src="js/game.js"></script>
+</html>

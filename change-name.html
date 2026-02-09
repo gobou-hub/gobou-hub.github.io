@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>リスナーページ｜名前変更</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="リスナー向けの名前変更ページです。新しい名前を設定してアカウントの名前を更新できます。">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <main class="site-main">
+        <section id="userStatusArea" aria-labelledby="userStatusHeading">
+            <h2 id="userStatusHeading" class="section-title visually-hidden">ユーザーステータス</h2>
+            <div class="button-container">
+                <button type="button" id="refreshButton" class="btn-secondary">
+                    <span class="icon-refresh"></span> 更新
+                </button>
+                <button id="LogoutButton">
+                    <span class="icon-power"></span>ログアウト
+                </button>
+            </div>
+            <div class="user-identification">
+                <p class="status-item">名前：<span id="UserName"></span></p>
+                <p class="status-item">TIkTokID：<span id="TIkTokID"></span></p>
+            </div>
+            <div class="status-grid">
+                <p class="status-item">ランク：<span id="Rank"></span></p>
+                <p class="status-item">総EXP：<span id="ExperiencePoints"></span></p>
+                <p class="status-item">次のランクまで：<span id="NextRank"></span></p>
+            </div>
+            <div class="status-grid">
+                <p class="status-item">総コイン数：<span id="Coin"></span></p>
+                <p class="status-item">総いいね数：<span id="Like"></span></p>
+                <p class="status-item">ボーナスEXP：<span id="Bonus"></span></p>
+            </div>
+            <div class="status-grid">
+                <p class="status-item">残りポイント：<span id="Point"></span></p>
+            </div>
+
+            <div id="MedalCollection" class="medal-area">
+                <h3 class="subsection-title">獲得メダル</h3>
+            </div>
+        </section>
+
+        <nav id="userActions" aria-label="ユーザー操作メニュー">
+            <h2 class="visually-hidden">操作メニュー</h2>
+            <ul class="action-list">
+                <li><button class="action-button" id="goToContactPageButton">お問い合わせ</button></li>
+                <li><button class="action-button" id="goToChangeNamePageButton">名前変更</button></li>
+                <li><button class="action-button" id="goToChangePassPageButton">パスワード変更</button></li>
+                <li><button class="action-button" id="goToMessagesPageButton">メッセージ</button></li>
+                <li><button class="action-button" id="goToUsePointPageButton">ポイント利用</button></li>
+                <li><button class="action-button" id="goToUsedPointsPageButton">ポイント利用履歴</button></li>
+                <!-- <li><button class="action-button" id="goToUsedGameRecordPageButton">ゲーム記録</button></li> -->
+            </ul>
+        </nav>
+
+        <section id="changeNameSection" aria-labelledby="changeNameHeading">
+            <h2 id="changeNameHeading" class="section-title">名前変更</h2>
+            <div class="section-header-row"></div>
+            <form id="changeNameForm">
+                <div class="form-group">
+                    <input type="text" id="newNameInput" name="newName" autocomplete="off" placeholder="新しい名前を入力"
+                        required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="SubmitButton" class="btn-submit">変更</button>
+                </div>
+            </form>
+        </section>
+        <div id="loading">
+            <div class="spinner"></div>
+            <p>処理中...</p>
+        </div>
+    </main>
+    <script src="js/main.js" defer></script>
+    <script src="js/change-name.js" defer></script>
+</body>
+
+</html>

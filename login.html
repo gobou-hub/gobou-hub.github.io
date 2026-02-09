@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リスナーページ｜ログイン</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&family=Poppins:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <main>
+        <h1 class="pop-h1">リスナーページ</h1>
+        <div id="LoginBox">
+            <form id="LoginForm">
+                <div class="form-group">
+                    <label for="TIkTokID" class="form-label">TikTokID：</label>
+                    <input type="text" id="TIkTokID" name="tiktokId" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="Password" class="form-label">パスワード：</label>
+                    <input type="password" id="Password" name="password" autocomplete="off">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" id="LoginButton" class="btn">ログイン</button>
+                    <button type="button" id="GoTopButton" class="btn">トップへ戻る</button>
+                </div>
+            </form>
+        </div>
+        <section id="announcementArea" class="announcement-section">
+            <h3 class="announcement-title">お知らせ</h3>
+            <p class="alert-text">
+                2025/09/01 <a href="super-fan.html">【重要】スーパーファンについて</a>をご確認ください。
+            </p>
+        </section>
+        <div id="Loading">
+            <div class="spinner"></div>
+            <p>ログイン中...</p>
+        </div>
+    </main>
+    <script src="js/login.js"></script>
+</body>
+
+</html>
